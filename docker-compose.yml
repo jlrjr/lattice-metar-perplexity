@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  metar-lattice:
+    build: .
+    environment:
+      - LATTICE_URL=${LATTICE_URL}
+      - ENVIRONMENT_TOKEN=${ENVIRONMENT_TOKEN}
+      - SANDBOXES_TOKEN=${SANDBOXES_TOKEN}
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - lattice-network
+
+networks:
+  lattice-network:
+    driver: bridge
+
+# Usage:
+# 1. Create .env file with your credentials:
+#    echo "LATTICE_URL=your-instance.com" > .env
+#    echo "ENVIRONMENT_TOKEN=your-token" >> .env
+#    echo "SANDBOXES_TOKEN=your-sandbox-token" >> .env
+# 
+# 2. Run with docker-compose:
+#    docker-compose up -d

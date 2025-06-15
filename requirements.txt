@@ -1,0 +1,15 @@
+# Anduril Lattice SDK
+anduril-lattice-sdk>=1.8.0
+
+# gRPC and networking
+grpclib>=0.4.3
+certifi>=2023.7.22
+
+# HTTP requests
+requests>=2.31.0
+
+# METAR parsing
+metar>=1.11.0
+
+# Additional utilities
+python-dateutil>=2.8.2
