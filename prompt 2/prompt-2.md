@@ -1,0 +1,1 @@
+Modify the previous assets to define entity health components for flight_condition, temperature_c, wind_speed_kt, and visibility_miles. Also, so we can display colors, set the entity disposition based on the flight condition where VFR=Assumed Friendly, MVFR=Suspect, IFR=Hostile.

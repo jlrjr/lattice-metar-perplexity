@@ -1,0 +1,30 @@
+# METAR to Lattice Integration Configuration Template
+# Copy this file to config.yml and fill in your values
+
+# Lattice Configuration
+lattice:
+  url: "your-lattice-instance.com"  # Your Lattice URL (without https://)
+  environment_token: "your-environment-bearer-token"  # Your environment token
+  sandboxes_token: "your-sandbox-token"  # Optional: for Lattice Sandboxes
+
+# Integration Settings
+integration:
+  update_interval_minutes: 30  # How often to update weather data
+  entity_expiry_hours: 2      # How long entities remain valid
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "metar_integration.log"  # Log file path
+
+# Airport Selection (optional - leave empty to use all New England airports)
+airports:
+  # Uncomment and modify to limit to specific airports
+  # include_only:
+  #   - KBOS  # Boston Logan
+  #   - KMHT  # Manchester
+  #   - KBDL  # Bradley/Hartford
+
+  # Uncomment to exclude specific airports
+  # exclude:
+  #   - KPVC  # Provincetown (seasonal)
