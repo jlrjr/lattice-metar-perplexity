@@ -524,7 +524,7 @@ class LatticeWeatherIntegration:
             temp_status = self._get_health_status_for_temperature(temperature_c)
             health_components.append(
                 ComponentHealth(
-                    id=f"{icao}_temperature",
+                    id=Entity.entity_id, # f"{icao}_temperature",
                     name="Temperature",
                     health=temp_status,
                     messages=[
@@ -542,7 +542,7 @@ class LatticeWeatherIntegration:
             wind_status = self._get_health_status_for_wind(wind_speed)
             health_components.append(
                 ComponentHealth(
-                    id=f"{icao}_wind_speed",
+                    id=Entity.entity_id, # f"{icao}_wind_speed",
                     name="Wind Speed",
                     health=wind_status,
                     messages=[
@@ -560,7 +560,7 @@ class LatticeWeatherIntegration:
             visibility_status = self._get_health_status_for_visibility(visibility)
             health_components.append(
                 ComponentHealth(
-                    id=f"{icao}_visibility",
+                    id=Entity.entity_id, # f"{icao}_visibility",
                     name="Visibility",
                     health=visibility_status,
                     messages=[
@@ -577,7 +577,7 @@ class LatticeWeatherIntegration:
 
         # Create entity
         entity = Entity(
-            entity_id=f"weather_{icao}_{int(time_now.timestamp())}",
+            entity_id=f"weather_{icao}",
             description=description,
             created_time=time_now,
             expiry_time=expiry_time,
@@ -632,16 +632,16 @@ class LatticeWeatherIntegration:
         elif condition == "MVFR":
             return HealthStatus.WARN
         elif condition == "IFR":
-            return HealthStatus.ERROR
+            return HealthStatus.FAIL
         elif condition == "LIFR":
-            return HealthStatus.ERROR
+            return HealthStatus.FAIL
         else:
-            return HealthStatus.UNKNOWN
+            return HealthStatus.OFFLINE
 
     def _get_health_status_for_temperature(self, temp_c: float) -> HealthStatus:
         """Map temperature to health status"""
         if temp_c < -20 or temp_c > 40:
-            return HealthStatus.ERROR
+            return HealthStatus.FAIL
         elif temp_c < -10 or temp_c > 35:
             return HealthStatus.WARN
         else:
@@ -659,7 +659,7 @@ class LatticeWeatherIntegration:
     def _get_health_status_for_visibility(self, visibility_miles: float) -> HealthStatus:
         """Map visibility to health status"""
         if visibility_miles < 1:
-            return HealthStatus.ERROR
+            return HealthStatus.FAIL
         elif visibility_miles < 5:
             return HealthStatus.WARN
         else:
